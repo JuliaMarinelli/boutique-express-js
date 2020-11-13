@@ -1,0 +1,44 @@
+include "layouts/layout.blade"
+replace block content
+  h1.brown-text.text-darken-4 #{title}
+  .form-container
+    form#updateForm.col.s12(action="/update-product" method="put")
+      .row
+        .input-field.col.s6
+          input(id="product_name" type="text" class="validate" name="name" value="#{product.name}")
+          label(for="product_name") Nom du produit
+        .input-field.col.s3
+          input#quantity.validate(type="number" name="quantity" value="#{product.quantity}")
+          label(for="quantity") Quantité 
+        .input-field.col.s3
+          input#price.validate(type="number" value="#{product.prix}")
+          label(for="price") Prix
+      .row
+        .input-field.col.s12
+          input#img_url.validate(type="url" name="img_url" value="#{product.img}")
+          label(for="img_url") Url de l'image
+      .row
+        .input-field.col.s4
+          input#date.datepicker(type="text" name="date" value="#{product.date}")
+          label(for="date") Date
+        .input-field.col.s5
+          select#categorieSelect(name="categorie")
+            option(value="" disabled) Choisissez une catégorie
+            foreach categories as categorie
+              -if(categorie === product.categorie)
+                option(value="#{categorie}" selected) #{categorie}
+              -else
+                option(value="#{categorie}") #{categorie}
+            label Catégorie
+        .input-field.col.s3
+          label
+            -if(product.livraison)
+              input#livraison.filled-in(type="checkbox" checked="checked" name="livraison")
+            -else
+              input#livraison.filled-in(type="checkbox" name="livraison")
+            span Livraison disponnible
+      input.btn.waves-effect.waves-light(type="submit" value="Modifié")
+      #message-error.message.card-panel.red.lighten-1
+        span.white-text Une erreur est survenue, le produit n'a pas été modifié !
+script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+script(src="/js/formSetup.js")

@@ -1,0 +1,43 @@
+include "layouts/layout.blade"
+replace block content
+  h1.brown-text.text-darken-4 #{title}
+  .form-container
+    form.col.s12(action="/add-product" method="post")
+      .row
+        .input-field.col.s6
+          input(id="product_name" type="text" class="validate" name="name")
+          label(for="product_name") Nom du produit
+        .input-field.col.s3
+          input#quantity.validate(type="number" name="quantity")
+          label(for="quantity") Quantité 
+        .input-field.col.s3
+          input#price.validate(type="number")
+          label(for="price") Prix
+      .row
+        .input-field.col.s12
+          input#img_url.validate(type="url" name="img_url")
+          label(for="img_url") Url de l'image
+      .row
+        .input-field.col.s4
+          input#date.datepicker(type="text" name="date")
+          label(for="date") Date
+        .input-field.col.s5
+          select#categorieSelect(name="categorie")
+            option(value="" disabled selected) Choisissez une catégorie
+            foreach categories as categorie
+              option(value="#{categorie}") #{categorie}
+            label Catégorie
+        .input-field.col.s3
+          label
+            input#livraison.filled-in(type="checkbox" checked="checked" name="livraison")
+            span Livraison disponnible
+      input.btn.waves-effect.waves-light(type="submit" value="post")
+      -if(typeof(error) !== 'undefined')
+        - if(!error) 
+          #message-confirmation.message.card-panel.teal
+            span.white-text Le produit à bien été ajouté !
+        -else 
+          #message-error.message.card-panel.red.lighten-1
+            span.white-text Une erreur est survenue, le produit n'a pas été ajouté !
+script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+script(src="/js/formSetup.js")

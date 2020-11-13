@@ -1,0 +1,21 @@
+include "layouts/layout.blade"
+replace block content
+  h1.brown-text.text-darken-4 #{title}
+  .form-container
+    form#removeForm.col.s12(action="/remove-product" method="delete")
+      .row
+        .input-field.col.s12
+          select#productSelect(name="productToDel")
+            option(value="" disabled selected) Choisissez un produit à supprimer
+            foreach productsByCategories as categorie
+              optgroup(label="#{categorie[0].categorie}")
+              foreach categorie as product
+                option(value="#{product.id}") #{product.name}
+          label Produit à supprimer
+      input.btn.waves-effect.waves-light(type="submit" value="supprimer")
+      #message-confirmation.message.card-panel.teal
+        span.white-text Le produit à bien été retiré !
+      #message-error.message.card-panel.red.lighten-1
+        span.white-text Une erreur est survenue, le produit n'a pas été retiré !
+script(src="/js/formSetup.js")
+script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")

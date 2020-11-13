@@ -1,0 +1,22 @@
+html
+    head
+        title Boutique - #{title}
+        link(rel='stylesheet', href='/css/main.css')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Pacifico&display=swap')
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+        link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+        script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+
+    body.brown.lighten-5
+        nav
+            .nav-wrapper.brown.lighten-3
+                a.brand-logo(href="/") Boutique
+                ul#nav-mobile.right.hide-on-med-and-down
+                    li
+                        a(href="/products") Nos Produits
+                    li
+                        a(href="/add-product") Ajouter un produit
+                    li
+                        a(href="/remove-product") Supprimer un produit
+        #content
+            block content

@@ -1,0 +1,26 @@
+include "layouts/layout.blade"
+replace block content
+  h1.brown-text.text-darken-4 Nos Produits
+
+  #productContainer
+    foreach categories as categorie
+      .divCategorie
+        h2.brown-text.text-darken-4.categorie-title #{categorie}
+          i.large.material-icons arrow_drop_up
+        .card-list
+          foreach products as product
+            -if(product.categorie === categorie)
+              .card.small(onclick="window.location='product/#{product.id}'")
+                .card-image
+                  img(src='#{product.img}')
+                  span.card-title.brown-text.text-darken-4 #{product.name}
+                .card-content.brown-text.text-darken-4
+                  p Quantité : #{product.quantity}
+                  p Date : #{product.date}
+                  -if(product.livraison)
+                    p Livraison disponnible
+                  -else
+                    p Livraison indisponnible
+                  p Prix : #{product.prix}€
+                  
+script(src="/js/main.js")

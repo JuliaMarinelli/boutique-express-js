@@ -1,0 +1,15 @@
+include "layouts/layout.blade"
+replace block content
+  .product-page
+    h1.brown-text.text-darken-4#productTitle #{product.name}
+    h3.brown-text.text-darken-4#productSubTitle #{product.categorie}
+    img(src='#{product.img}')
+    #productInfo
+      p Quantité : #{product.quantity}
+      p Date : #{product.date}
+      - if(product.livraison)
+        p Livraison disponnible
+      - else
+        p Livraison indisponnible
+      p Prix : #{product.prix}€
+    a.waves-effect.waves-light.btn-large(href="/update-product/#{product.id}") Modifier
